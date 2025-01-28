@@ -1,7 +1,7 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.title("Tutorial Step 3 : Button")
+root.title("Tutorial Step 4 : Entry")
 root.geometry("800x600")
 
 e = tk.Entry(root)
