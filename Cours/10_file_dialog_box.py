@@ -4,7 +4,7 @@ from tkinter import filedialog,messagebox
 
 def open():
     try : 
-        filename = filedialog.askopenfilename(initialdir='Cours/cours_10/assets', title="Select a File", filetypes=[("Image Files", "*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.ico"),("All Files", '*.*')])
+        filename = filedialog.askopenfilename(initialdir='Cours/assets', title="Select a File", filetypes=[("Image Files", "*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.ico"),("All Files", '*.*')])
         if filename :
             img = Image.open(filename)
             img = img.resize((300, 300), Image.Resampling.LANCZOS)
@@ -16,7 +16,7 @@ def open():
 
 root = tk.Tk()
 root.title("Tutorial Step 10 : File Dialog Box")
-root.iconbitmap('Cours/cours_10/assets/holo_icon.ico') 
+root.iconbitmap('Cours/assets/holo_icon.ico') 
 root.geometry("400x400")
     
 btn = tk.Button(root, text="Open file", command=open)

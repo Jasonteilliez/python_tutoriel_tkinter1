@@ -28,17 +28,17 @@ def change_image(direction):
 
 root = tk.Tk()
 root.title("image viewing app")
-root.iconbitmap('Cours/cours_5/assets/holo_icon.ico') 
+root.iconbitmap('Cours/assets/holo_icon.ico') 
 
-my_image1 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco1.jpg").resize((500,500)))
-my_image2 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco2.jpg").resize((500,500)))
-my_image3 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco3.jpg").resize((500,500)))
-my_image4 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco4.jpg").resize((500,500)))
-my_image5 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco5.jpg").resize((500,500)))
-my_image6 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco6.jpg").resize((500,500)))
-my_image7 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco7.jpg").resize((500,500)))
-my_image8 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco8.jpg").resize((500,500)))
-my_image9 = ImageTk.PhotoImage(Image.open("Cours/exercice_2/assets/fuzichoco9.jpg").resize((500,500)))
+my_image1 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco1.jpg").resize((500,500)))
+my_image2 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco2.jpg").resize((500,500)))
+my_image3 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco3.jpg").resize((500,500)))
+my_image4 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco4.jpg").resize((500,500)))
+my_image5 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco5.jpg").resize((500,500)))
+my_image6 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco6.jpg").resize((500,500)))
+my_image7 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco7.jpg").resize((500,500)))
+my_image8 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco8.jpg").resize((500,500)))
+my_image9 = ImageTk.PhotoImage(Image.open("Cours/assets/fuzichoco9.jpg").resize((500,500)))
 
 image_list = [my_image1,my_image2,my_image3,my_image4,my_image5,my_image6,my_image7,my_image8,my_image9]
 current_image = 0 
