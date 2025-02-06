@@ -13,8 +13,7 @@ def show_selection():
     lbl.config(text="I like " + ", ".join(selected_options) if selected_options else "I don't like code.")
 
 def show_on_off():
-    print(var4.get())
-    lbl.config(text=var4.get())
+    lbl2.config(text=var4.get())
 
 
 root = tk.Tk()
@@ -41,7 +40,7 @@ var4 = tk.StringVar()
 var4.set("Off")
 c4 = tk.Checkbutton(root, text='Java',variable=var4, onvalue="On", offvalue="Off", command=show_on_off)
 c4.pack()
-lbl = tk.Label(root, text="Off")
-lbl.pack(pady=10)
+lbl2 = tk.Label(root, text="Off")
+lbl2.pack(pady=10)
 
 root.mainloop()
