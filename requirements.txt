@@ -2,3 +2,4 @@ Pillow
 requests
 numpy
 matplotlib
+mysql-connector

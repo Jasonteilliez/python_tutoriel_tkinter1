@@ -1,7 +1,5 @@
 import tkinter as tk
 from PIL import ImageTk, Image
-import numpy as np
-import matplotlib.pyplot as plt
 
 class MainFrame(tk.Frame):
     def __init__(self, parent):
