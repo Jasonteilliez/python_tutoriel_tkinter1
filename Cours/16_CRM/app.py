@@ -1,12 +1,15 @@
 import tkinter as tk
 from customers import CustomersModel
+import csv
         
 
 class MainFrame(tk.Frame):
-    def __init__(self, parent, add_customer, fetch_all_customers):
-        super().__init__(parent)
+    def __init__(self, parent, add_customer, fetch_all_customers, export_customer_data_to_csv):
+        super().__init__(parent, padx=10)
+
         self.add_customer = add_customer
         self.fetch_all_customers = fetch_all_customers
+        self.export_customer_data_to_csv = export_customer_data_to_csv
 
         self.customers = []
         self.label_customers_list = []
@@ -32,25 +35,28 @@ class MainFrame(tk.Frame):
         button_add_customer = tk.Button(self, text="submit", command=self.add_customer)
         button_clear_field = tk.Button(self, text="clear", command=self.clear_field)
         button_fetch_all_customers = tk.Button(self, text="Curtomers list", command=self.display_customers_list)
+        button_csv_export = tk.Button(self, text="Save to CSV", command=self.export_customer_data_to_csv)
         
         # Display widget
         label_title.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-        label_first_name.grid(row=1, column=0, padx=5, sticky="w")
-        label_last_name.grid(row=2, column=0, padx=5, sticky="w")
-        label_zipcode.grid(row=3, column=0, padx=5, sticky="w")
-        label_price_paid.grid(row=4, column=0, padx=5, sticky="w")
+        label_first_name.grid(row=1, column=0, sticky="w")
+        label_last_name.grid(row=2, column=0, sticky="w")
+        label_zipcode.grid(row=3, column=0, sticky="w")
+        label_price_paid.grid(row=4, column=0, sticky="w")
 
         self.entry_first_name.grid(row=1, column=1, sticky="e", pady=5)
         self.entry_last_name.grid(row=2, column=1, sticky="e", pady=5)
         self.entry_zipcode.grid(row=3, column=1, sticky="e", pady=5)
         self.entry_price_paid.grid(row=4, column=1, sticky="e", pady=5)
 
-        button_add_customer.grid(row=5,column=0, sticky="w", padx=5, pady=5)
-        button_clear_field.grid(row=5,column=1, padx=5, pady=5)
-        button_fetch_all_customers.grid(row=6,column=0, padx=5, pady=5)
+        button_add_customer.grid(row=5,column=0, sticky="w", pady=5)
+        button_clear_field.grid(row=5,column=1, pady=5)
+        button_fetch_all_customers.grid(row=6,column=0, pady=5)
 
         self.frame_display_customers.grid(row=7, column=0, columnspan=2, sticky='w')
+
+        button_csv_export.grid(row=8, column=0 , stick='w')
 
     def clear_field(self):
         print("\nClear customer creation fields.")
@@ -77,9 +83,8 @@ class MainFrame(tk.Frame):
                 for k_data, data in enumerate(customer):
                     label_data = tk.Label(self.frame_display_customers, text=data)
                     label_data_list.append(label_data)
-                    label_data.grid(row=k_customer, column=k_data, padx=5, sticky='w')
+                    label_data.grid(row=k_customer, column=k_data, sticky='w')
                 self.label_customers_list.append(label_data_list)
-            print(self.label_customers_list)
 
 class App:
     def __init__(self, root):
@@ -90,7 +95,7 @@ class App:
 
         self.customers_db = CustomersModel()
 
-        self.main_frame = MainFrame(root, self.add_customer, self.fetch_all_customers)
+        self.main_frame = MainFrame(root, self.add_customer, self.fetch_all_customers, self.export_customer_data_to_csv)
         self.main_frame.pack(expand=True, fill='both')
         
     def add_customer(self):
@@ -109,3 +114,18 @@ class App:
     def fetch_all_customers(self):
         print ("\nFetch all customers.")
         return self.customers_db.select_all()
+    
+    def export_customer_data_to_csv(self):
+        print ("\nExporting data.....")
+        customers_data = self.fetch_all_customers()
+
+        try: 
+            with open('Cours/16_CRM/data/customers.csv', 'a+', newline='') as f:
+                f.truncate(0)
+                w = csv.writer(f, dialect='excel')
+                w.writerows(customers_data)
+                print ("\nData Exported.")
+        except :
+            print ("Failed to export data.")
+        
+
