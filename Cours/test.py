@@ -1,21 +1,18 @@
-def generator_function():
-    try:
-        print("Entering try block")
-        yield "Yielding from generator"
-    finally:
-        print("Executing finally block")
+import tkinter as tk
 
-def calling_function():
-    gen = generator_function()
-    try:
-        value = next(gen)  # Calling the generator function
-        print(f"Received: {value}")
-    except StopIteration:
-        print("Generator finished")
-    finally:
-        print("Calling function cleanup")
+def on_button_click(index):
+    print(f"Button {index} clicked")
 
-# Running the function
-# calling_function()
+root = tk.Tk()
+root.title("Button List Example")
+
+buttons = []
+
+for i in range(5):  # Creating 5 buttons
+    btn = tk.Button(root, text=f"Button {i}", command=lambda i=i: on_button_click(i))
+    btn.pack(pady=5)
+    buttons.append(btn)  # Store buttons in a list if needed
+
+root.mainloop()
 
 

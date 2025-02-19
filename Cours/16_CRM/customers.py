@@ -19,7 +19,7 @@ class CustomersModel (Database):
             self.mysql_error_handler(err)
         self.close_connection(db)
 
-    def select_all(self):
+    def get_all_customers(self):
         try :
             db = self.create_connection()
             cursor = db.cursor()
@@ -32,12 +32,45 @@ class CustomersModel (Database):
             self.mysql_error_handler(err)
         self.close_connection(db)
 
-    def create(self, values):
+    def get_customer_by(self, data):
+        try:
+            db = self.create_connection()
+            cursor = db.cursor()
+            query = "SELECT * FROM customers WHERE {} = %s".format(data['column'])
+            cursor.execute(query, (data['value'],))
+            response = cursor.fetchall()
+            self.close_connection(db)
+            return response
+        except mysql.connector.Error as err:
+            self.mysql_error_handler(err)
+        self.close_connection(db)
+
+    def create_customer(self, values):
         try:
             db = self.create_connection()
             cursor = db.cursor()
             query = """INSERT INTO customers (first_name, last_name, zipcode, price_paid)
                 VALUES (%(first_name)s, %(last_name)s, %(zipcode)s, %(price_paid)s)"""
+            cursor.execute(query, values)
+            db.commit()
+            self.close_connection(db)
+            return
+        except mysql.connector.Error as err:
+            self.mysql_error_handler(err)
+        self.close_connection(db)
+
+    def update_customer(self, values):
+        try:
+            db = self.create_connection()
+            cursor = db.cursor()
+            query = """
+                UPDATE customers SET 
+                first_name = %(first_name)s,
+                last_name = %(last_name)s,
+                zipcode = %(zipcode)s,
+                price_paid = %(price_paid)s
+                WHERE user_id = %(user_id)s
+            """
             cursor.execute(query, values)
             db.commit()
             self.close_connection(db)

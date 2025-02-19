@@ -1,8 +1,10 @@
 import tkinter as tk
-from customers import CustomersModel
 import csv
-        
 
+from customers import CustomersModel
+from search_window import SearchWindow
+
+        
 class MainFrame(tk.Frame):
     def __init__(self, parent, add_customer, fetch_all_customers, export_customer_data_to_csv):
         super().__init__(parent, padx=10)
@@ -36,6 +38,7 @@ class MainFrame(tk.Frame):
         button_clear_field = tk.Button(self, text="clear", command=self.clear_field)
         button_fetch_all_customers = tk.Button(self, text="Curtomers list", command=self.display_customers_list)
         button_csv_export = tk.Button(self, text="Save to CSV", command=self.export_customer_data_to_csv)
+        button_search_customers = tk.Button(self, text="Search Customers", command=self.open_search_window)
         
         # Display widget
         label_title.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
@@ -57,6 +60,7 @@ class MainFrame(tk.Frame):
         self.frame_display_customers.grid(row=7, column=0, columnspan=2, sticky='w')
 
         button_csv_export.grid(row=8, column=0 , stick='w')
+        button_search_customers.grid(row=8, column=1, sticky='w')
 
     def clear_field(self):
         print("\nClear customer creation fields.")
@@ -73,8 +77,13 @@ class MainFrame(tk.Frame):
             "price_paid": self.entry_price_paid.get(),
         }
 
-    def display_customers_list(self):  
+    def display_customers_list(self): 
+        if self.label_customers_list:
+            for labels in self.label_customers_list:
+                for label in labels:
+                    label.destroy() 
         self.label_customers_list = []
+
         self.customers = self.fetch_all_customers()
 
         if self.customers:
@@ -85,6 +94,10 @@ class MainFrame(tk.Frame):
                     label_data_list.append(label_data)
                     label_data.grid(row=k_customer, column=k_data, sticky='w')
                 self.label_customers_list.append(label_data_list)
+
+    def open_search_window(self):
+        SearchWindow(self)
+
 
 class App:
     def __init__(self, root):
@@ -108,12 +121,12 @@ class App:
         "   Price paid : {price_paid}"\
         .format(**values))
         
-        self.customers_db.create(values)
+        self.customers_db.create_customer(values)
         self.main_frame.clear_field()
 
     def fetch_all_customers(self):
         print ("\nFetch all customers.")
-        return self.customers_db.select_all()
+        return self.customers_db.get_all_customers()
     
     def export_customer_data_to_csv(self):
         print ("\nExporting data.....")
