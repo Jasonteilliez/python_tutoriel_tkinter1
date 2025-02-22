@@ -81,6 +81,7 @@ class App:
     def valider_text(self):
         self.text = self.entry_text.get()
         self.text = self.text.strip()
+        self.text = self.text.replace("\n", "").replace("\r", "")
         if self.text == "" :
             return
         
