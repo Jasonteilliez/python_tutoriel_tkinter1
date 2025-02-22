@@ -2,10 +2,27 @@ import tkinter as tk
 import os
 
 def open_file():
-    print("Open File clicked!")
+    hide_frame()
+    frame_open.pack(expand=True, fill='both')
 
 def save_file():
-    print("Save File clicked!")
+    hide_frame()
+    frame_save.pack(expand=True, fill='both')
+
+def undo():
+    hide_frame()
+    frame_undo.pack(expand=True, fill='both')
+
+def redo():
+    hide_frame()
+    frame_redo.pack(expand=True, fill='both')
+
+def hide_frame():
+    frame_open.pack_forget()
+    frame_save.pack_forget()
+    frame_undo.pack_forget()
+    frame_redo.pack_forget()
+
 
 def exit_app():
     root.quit()  # Close the application
@@ -30,11 +47,22 @@ menu_bar.add_cascade(label="File", menu=file_menu)
 
 # ---- Edit Menu ----
 edit_menu = tk.Menu(menu_bar, tearoff=0)
-edit_menu.add_command(label="Undo", command=lambda: print("Undo clicked"))
-edit_menu.add_command(label="Redo", command=lambda: print("Redo clicked"))
+edit_menu.add_command(label="Undo", command=undo)
+edit_menu.add_command(label="Redo", command=redo)
 menu_bar.add_cascade(label="Edit", menu=edit_menu)
 
 # Set the menu bar in the application
 root.config(menu=menu_bar)
+
+frame_open = tk.Frame(root)
+frame_save = tk.Frame(root)
+frame_undo = tk.Frame(root)
+frame_redo = tk.Frame(root)
+
+label_open = tk.Label(frame_open, text="Open menu").pack()
+label_save = tk.Label(frame_save, text="Save menu").pack()
+label_undo = tk.Label(frame_undo, text="Undo menu").pack()
+label_redo = tk.Label(frame_redo, text="Redo menu").pack()
+
 
 root.mainloop()
