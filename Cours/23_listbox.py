@@ -30,7 +30,7 @@ def get_selected_item():
 basedir = os.path.dirname(__file__)
 
 root = tk.Tk()
-root.title("Tutoriel step 22 : Delete Children Widgets")
+root.title("Tutoriel step 23 : Listbox")
 root.iconbitmap(os.path.join(basedir, "assets/holo_icon.ico"))
 root.geometry('400x400')
 
