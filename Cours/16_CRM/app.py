@@ -6,12 +6,9 @@ from search_window import SearchWindow
 
         
 class MainFrame(tk.Frame):
-    def __init__(self, parent, add_customer, fetch_all_customers, export_customer_data_to_csv):
+    def __init__(self, parent, controller):
         super().__init__(parent, padx=10)
-
-        self.add_customer = add_customer
-        self.fetch_all_customers = fetch_all_customers
-        self.export_customer_data_to_csv = export_customer_data_to_csv
+        self.controller = controller
 
         self.customers = []
         self.label_customers_list = []
@@ -34,10 +31,10 @@ class MainFrame(tk.Frame):
         self.entry_zipcode = tk.Entry(self)
         self.entry_price_paid = tk.Entry(self)
 
-        button_add_customer = tk.Button(self, text="submit", command=self.add_customer)
+        button_add_customer = tk.Button(self, text="submit", command=self.controller.add_customer)
         button_clear_field = tk.Button(self, text="clear", command=self.clear_field)
         button_fetch_all_customers = tk.Button(self, text="Curtomers list", command=self.display_customers_list)
-        button_csv_export = tk.Button(self, text="Save to CSV", command=self.export_customer_data_to_csv)
+        button_csv_export = tk.Button(self, text="Save to CSV", command=self.controller.export_customer_data_to_csv)
         button_search_customers = tk.Button(self, text="Search Customers", command=self.open_search_window)
         
         # Display widget
@@ -84,7 +81,7 @@ class MainFrame(tk.Frame):
                     label.destroy() 
         self.label_customers_list = []
 
-        self.customers = self.fetch_all_customers()
+        self.customers = self.controller.fetch_all_customers()
 
         if self.customers:
             for k_customer, customer in enumerate(self.customers):
@@ -108,7 +105,7 @@ class App:
 
         self.customers_db = CustomersModel()
 
-        self.main_frame = MainFrame(root, self.add_customer, self.fetch_all_customers, self.export_customer_data_to_csv)
+        self.main_frame = MainFrame(root, self)
         self.main_frame.pack(expand=True, fill='both')
         
     def add_customer(self):

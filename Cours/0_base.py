@@ -1,29 +1,13 @@
 import tkinter as tk
-from PIL import ImageTk, Image
+import os
 
-class MainFrame(tk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent, bg="#cccccc")
-        self.init_ui()
+basedir = os.path.dirname(__file__)
 
-    def init_ui(self):
-        pass       
+root = tk.Tk()
+root.title("Tutoriel step 0 : ")
+root.iconbitmap(os.path.join(basedir, "assets/holo_icon.ico"))
+root.geometry('400x400')
 
 
-class App(tk.Tk):
-    def __init__(self,):
-        super().__init__()
-        self.title("Title")
-        self.iconbitmap('Cours/assets/holo_icon.ico')
-        self.geometry('400x400')
 
-        self.frame = MainFrame(self)
-        self.frame.pack(expand=True, fill='both')
-        
-
-# if __name__ == "__main__":
-#     app = App()
-#     app.mainloop()
-
-app = App()
-app.mainloop()
+root.mainloop()
